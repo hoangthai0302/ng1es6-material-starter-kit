@@ -1,0 +1,22 @@
+<h3>Planning</h3>
+<md-button class='md-button md-raised md-primary' ng-click="$ctrl.showConfirm()">Confirm</md-button>
+<md-button class='md-button md-raised' ng-click="$ctrl.showAlert()">Alert</md-button>
+
+<md-select placeholder="Assign to user" ng-model="user" md-on-open="$ctrl.loadUsers()" style="width: 200px;">
+    <md-option ng-value="user" ng-repeat="user in $ctrl.users">{{user.name}}</md-option>
+</md-select>
+
+<md-autocomplete 
+    md-selected-item="$ctrl.selectedItem" 
+    md-min-length="0" 
+    md-item-text="item.name"
+    md-search-text="searchText" 
+    md-items="item in $ctrl.searchUsers(searchText)"
+    style="width:300px"
+    >
+    <md-item-template>
+        <span md-highlight-text="searchText">{{item.name}}</span>
+    </md-item-template>
+</md-autocomplete>
+<br/>
+<md-datepicker ng-model="$ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
