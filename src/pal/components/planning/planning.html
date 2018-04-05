@@ -1,22 +1,41 @@
-<h3>Planning</h3>
-<md-button class='md-button md-raised md-primary' ng-click="$ctrl.showConfirm()">Confirm</md-button>
-<md-button class='md-button md-raised' ng-click="$ctrl.showAlert()">Alert</md-button>
+<div class='planning padding-20'>
 
-<md-select placeholder="Assign to user" ng-model="user" md-on-open="$ctrl.loadUsers()" style="width: 200px;">
-    <md-option ng-value="user" ng-repeat="user in $ctrl.users">{{user.name}}</md-option>
-</md-select>
+    <h3>Planning</h3>
+    <md-button class='md-button md-raised md-primary' ng-click="$ctrl.showConfirm()">Confirm</md-button>
+    <md-button class='md-button md-raised' ng-click="$ctrl.showAlert()">Alert</md-button>
+    
+    <layout-column>
+        <label>Product Code</label>
+        <md-select placeholder="Select user" ng-model="user" md-on-open="$ctrl.loadUsers()" >
+            <md-option ng-value="user" ng-repeat="user in $ctrl.users">{{user.name}}</md-option>
+        </md-select>
+    </layout-column>
+    
+    <layout-column>
+        <label>Customer</label>
+        <md-autocomplete 
+            md-selected-item="$ctrl.selectedItem" 
+            md-min-length="0" 
+            md-item-text="item.name"
+            placeholder="Type or search"
+            md-search-text="searchText" 
+            md-items="item in $ctrl.searchUsers(searchText)"
+            >
+            <md-item-template>
+                <span md-highlight-text="searchText">{{item.name}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    </layout-column>
+    <br/>
+    <md-datepicker ng-model="$ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
 
-<md-autocomplete 
-    md-selected-item="$ctrl.selectedItem" 
-    md-min-length="0" 
-    md-item-text="item.name"
-    md-search-text="searchText" 
-    md-items="item in $ctrl.searchUsers(searchText)"
-    style="width:300px"
-    >
-    <md-item-template>
-        <span md-highlight-text="searchText">{{item.name}}</span>
-    </md-item-template>
-</md-autocomplete>
-<br/>
-<md-datepicker ng-model="$ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+    <br/>
+
+    <hmx-chips data = "$ctrl.data" display="name" closeable="true" active="active" on-item-click="$ctrl.toggleActive(item)"></hmx-chips>
+    <md-button class='md-raised' ng-click="$ctrl.addChip()">Add item</md-button>
+    <pre>
+        <h3>Test</h3>
+        {{$ctrl.data | json}}
+    </pre>
+
+</div>

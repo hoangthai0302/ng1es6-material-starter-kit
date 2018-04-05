@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const config = {
 	entry: ['babel-polyfill', './src/app.module.js', './src/vendor.module.js'
@@ -24,7 +25,15 @@ const config = {
 				test: /\.(scss)$/,
 				use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: ['css-loader','sass-loader']
+                    use: ['css-loader',
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    plugins: (loader) => [autoprefixer()]
+                                }
+                            },
+                        'sass-loader'
+                    ]
 				  })),
 			},
 			{
@@ -34,7 +43,6 @@ const config = {
 					use: ['css-loader', 'sass-loader']
 				  })
 			},
-			// for fixing of loading bootstrap icon files
 			{
 				test: /\.(png|jpg|jpeg|gif|svg)$/,
                 use: ['file-loader?name=[name].[ext]',
@@ -45,7 +53,7 @@ const config = {
 				test: /\.(eot|ttf|woff|woff2)$/,
 				loader: 'file-loader',
 				options: {
-					name: './[name].[ext]'
+					name: './fonts/[name].[ext]'
 				}
 			},
 			{ test: /\.html$/, loader: 'html-loader' }
@@ -79,7 +87,7 @@ const config = {
 		port: 3000,
 		contentBase: './dist',
         historyApiFallback: true,
-        compress:true,
+        compress:false,
         hot:true
 	}
 };

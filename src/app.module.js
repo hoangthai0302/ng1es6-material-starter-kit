@@ -6,7 +6,7 @@ import 'angular-translate';
 import 'angular-animate';
 import '@uirouter/angularjs';
 
-import Common from './common';
+import HmxCommon from './common';
 import Pal from './pal'
 import AppConfig from './app.config';
 import AppStartUp from './app.startup'
@@ -22,7 +22,7 @@ const appModule = angular
 		'ngAnimate',
         'ui.router',
         'pascalprecht.translate',
-        Common,
+        HmxCommon,
         Pal
 	])
 	.config(AppConfig)

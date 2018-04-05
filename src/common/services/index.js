@@ -5,10 +5,10 @@ import DialogService from './dialog.service';
 import CacheService from './cache.service';
 
 const ServicesModule = angular
-  .module('common.services', [])
+  .module('hmx-common.services', [])
   .service('ApiService', ApiService)  
-  .service('DialogService', DialogService)
-  .service('CacheService', CacheService)
+  .service('hmxDialog', DialogService)
+  .service('hmxCache', CacheService)
   .name;
 
 export default ServicesModule;

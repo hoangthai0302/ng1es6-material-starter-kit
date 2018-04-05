@@ -1,27 +1,60 @@
 import template from './planning.html';
 /* @ngInject */
 export default {
-    template: template,
-    controller: class Controller {
-        /* @ngInject */
-		constructor($log, DialogService, $timeout, $q, $state) {
+	template: template,
+	controller: class Controller {
+		/* @ngInject */
+		constructor($log, hmxDialog, $timeout, $q, $state, $element) {
 			Object.assign(this, {
 				$log,
-				DialogService,
-                $timeout,
-                $state,
-				$q
+				hmxDialog,
+				$timeout,
+				$state,
+				$q,
+				$element
 			})
 
 		}
 
-        searchUsers(text) {
+		$onInit() {
+			this.data = [{
+					id: 1,
+					name: 'Scooby Doo',
+					active: false
+				},
+				{
+					id: 2,
+					name: 'Shaggy Rodgers'
+				},
+				{
+					id: 3,
+					name: 'Fred Jones',
+					active: false
+				}
+
+
+            ];
             
-            let deferred = this.$q.defer();
+		}
+		addChip() {
+			this.data.push({
+				id: Math.floor(Math.random() * 1000),
+				name: Math.random().toString(36).substr(2, 16),
+				active: false
+			})
+		}
+
+		toggleActive(item) {
+			item.active = !item.active;
+		}
+
+		searchUsers(text) {
+
+			let deferred = this.$q.defer();
 
 			if (!this.users) {
 
-				
+
 				this.$timeout(() => {
 
 					this.users = [{
@@ -56,33 +89,33 @@ export default {
 							id: 8,
 							name: 'Velma Dinkley'
 						}
-                    ];
-                    if(!text){
-                        deferred.resolve(this.users);
-                    }else{
-                        deferred.resolve(this.users.filter((u)=>{
-                            return u.name.indexOf(text) !== -1;
-                        }));
-                    }
+					];
+					if (!text) {
+						deferred.resolve(this.users);
+					} else {
+						deferred.resolve(this.users.filter((u) => {
+							return u.name.indexOf(text) !== -1;
+						}));
+					}
 
 
 				}, 650);
-            }else{
-                if(!text){
-                    deferred.resolve(this.users);
-                }else{
-                    deferred.resolve(this.users.filter((u)=>{
-                        return u.name.indexOf(text) !== -1;
-                    }));
-                }
-            }
-            
-            return deferred.promise;
-        }
-        
-        changeState(){
-            this.$state.go('app.overview')
-        }
+			} else {
+				if (!text) {
+					deferred.resolve(this.users);
+				} else {
+					deferred.resolve(this.users.filter((u) => {
+						return u.name.indexOf(text) !== -1;
+					}));
+				}
+			}
+
+			return deferred.promise;
+		}
+
+		changeState() {
+			this.$state.go('app.overview')
+		}
 
 		loadUsers() {
 			if (this.users) {
@@ -117,12 +150,12 @@ export default {
 		};
 
 		showDialog() {
-			this.DialogService.showComponent('<h3>Hello world</h3>', null, {})
+			this.hmxDialog.showComponent('<h3>Hello world</h3>', null, {})
 
 		}
 
 		showConfirm() {
-			this.DialogService.confirm({
+			this.hmxDialog.confirm({
 				title: 'Please confirm',
 				message: `<p>Custom html content here <a href='#'>Link</a></p>`
 			}).then(() => {
@@ -131,7 +164,7 @@ export default {
 		}
 
 		showAlert() {
-			this.DialogService.alert({
+			this.hmxDialog.alert({
 				title: 'Alert',
 				message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 			}).then(() => {
@@ -139,5 +172,5 @@ export default {
 			})
 		}
 
-    }
+	}
 };

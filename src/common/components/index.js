@@ -1,6 +1,11 @@
-import CardItem from './card-item/card-item';
-export default angular.module('common.component', [
+import hmxChips from './chips';
+
+import cardItem from './card-item/card-item';
+import inputsearch from './input-search/input-search.component'
+export default angular.module('hmx-common.components', [
+    hmxChips
 ])
-.component('cardItem', CardItem)
+.component('hmxCardItem', cardItem)
+.component('hmxInputSearch', inputsearch)
 .name;
 

@@ -26,6 +26,12 @@
     box-shadow: 0 1px 10px #333;
 }
 
+md-autocomplete {
+    margin-top:8px;
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: red;
+    }
+}
 md-autocomplete-wrap {
     border-radius: 3px ;
     &.md-menu-showing {
@@ -33,6 +39,9 @@ md-autocomplete-wrap {
     }
 }
 
+md-select {
+    margin-top:8px;
+}
 .md-select-value {
     height: 45px;
     background: white;
@@ -44,6 +53,10 @@ md-autocomplete-wrap {
 
 .md-select-value > span:not(.md-select-icon) {
     text-indent: 1em;
+}
+
+.md-select-placeholder{
+    font-style: italic;
 }
 
 md-select:not([disabled]):focus .md-select-value {

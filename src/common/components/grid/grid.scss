@@ -1,0 +1,40 @@
+.ui-grid {
+    width: 100%;
+    box-shadow: 1px 0 5px #ccc;
+    .ui-grid-cell-contents {
+        span.ui-grid-invisible {
+            display: none;
+        }
+    }
+
+
+    .watermark {
+        position: absolute;
+        top: 50%;                    
+        transform: translateY(-50%); 
+        opacity: 0.25;
+        font-size: 1.5em;
+        width: 100%;
+        text-align: center;
+        z-index: 1000;
+    }
+    .loading-circular {
+        position: absolute;
+        top: calc(50% - 20px); 
+        left:50%;
+    }
+
+    .ui-grid-top-panel {
+        background: none #f3f3f3;
+    }
+        
+    &.loading .ui-grid-viewport {
+        opacity: 0.5;
+    }
+
+    .ui-grid-cell-contents {
+        height: 29px!important;
+    }
+
+
+}

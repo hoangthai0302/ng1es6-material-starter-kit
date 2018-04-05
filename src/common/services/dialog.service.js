@@ -157,10 +157,6 @@ class DialogService {
         return this.$mdDialog.show(confirm);  
     }
 
-    show() {
-        return this.$mdDialog.show.call(arguments);
-    }
-
     hide() {
         return this.$mdDialog.hide.call(arguments);
     }
