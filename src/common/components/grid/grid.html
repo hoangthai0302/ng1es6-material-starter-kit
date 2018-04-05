@@ -1,24 +1,5 @@
-<h3 ng-if="$ctrl.options.showSelectionStatus">
-    <span ng-if="$ctrl.options.data.length > 0">
-        {{$ctrl.selectedRows.length || 0}}/{{$ctrl.options.getTotalRecord() || $ctrl.options.data.length}} Total
-    </span>&nbsp;
-</h3>
 
 
-<div ng-if="$ctrl.options.enableRowSelection" ui-grid="$ctrl.options" ng-attr-id="{{$ctrl.options.id}}" data-ui-grid-infinite-scroll
+<div ng-if="$ctrl.options.enableRowSelection" ui-grid="$ctrl.options" class="grid" data-ui-grid-infinite-scroll
     ui-grid-selection ui-grid-exporter ng-class="$ctrl.options.cssClass + ($ctrl.isLoading?' loading':'')">
-    <div class="watermark" layout="row" layout-align="space-around" ng-show="!$ctrl.isLoading && !$ctrl.options.data.length">
-        <span>{{'text_no_data_available' | translate}}</span>
-    </div>
-    <div class="loading-circular" ng-show="$ctrl.isLoading" layout="row" layout-align="space-around center">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </div>
-    <watcher data="$ctrl.options.data" options="$ctrl.options" />
-</div>
-<div ng-if="!$ctrl.options.enableRowSelection" ui-grid="$ctrl.options" ng-attr-id="{{$ctrl.options.id}}" ng-class="$ctrl.options.cssClass" data-ui-grid-infinite-scroll>
-    <div class="watermark" ng-show="!$ctrl.options.data.length">{{'text_no_data_available' | translate}}</div>
-    <div class="loading-circular" ng-show="$ctrl.isLoading" layout="row" layout-align="space-around center">
-            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        </div>
-    <watcher data="$ctrl.options.data" options="$ctrl.options" />
 </div>

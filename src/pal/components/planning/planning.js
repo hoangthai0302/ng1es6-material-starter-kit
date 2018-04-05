@@ -33,7 +33,89 @@ export default {
 				}
 
 
-            ];
+			];
+
+			this.myData = [
+				{
+					firstName: "Cox",
+					lastName: "Carney",
+					company: "Enormo",
+					employed: true
+				},
+				{
+					firstName: "Lorraine",
+					lastName: "Wise",
+					company: "Comveyer",
+					employed: false
+				},
+				{
+					firstName: "Nancy",
+					lastName: "Waters",
+					company: "Fuelton",
+					employed: false
+				}
+			  ];
+
+			  let data = [];
+			  for(let i = 0; i < 1000; i++){
+				  data.push({
+					  actualId: 'asdf asdf',
+					  status:'complete',
+					  stringValueEng:'TEXT_OPK'
+				  })
+			  }
+			
+			this.gridOptions = {
+                appScopeProvider: this,
+                data: data,
+                maxRow: 9,
+                cssClass: 'import-string-grid',
+                enableRowSelection: true,
+                isRowSelectable: (row) => {
+                    if (row.entity.status !== "Completed") return false;
+                    else return true;
+                },
+                onRowSelectionClick(row) {
+                    if (row.entity.status !== "Completed") {
+                        self.DialogService.showMessage(`Translation Request is only allowed for the 'Completed' Status String.`)
+                    }
+                }
+            }
+
+            this.gridOptions.columnDefs = [{
+                    field: 'actualId',
+                    displayName: 'Actual ID'
+                },
+                {
+                    field: 'stringValueEng',
+                    displayName: 'English (US)'
+                },
+                {
+                    name: 'Status',
+                    cellTemplate: `
+                                <div class="ui-grid-cell-contents text-center">
+                                    {{row.entity.status}}
+                                </div>
+                            `,
+                    width: '80',
+                    headerCellClass: 'text-center'
+                },
+                {
+                    field: 'View',
+                    width: '60',
+                    cellTemplate: `
+                        <div layout="row" layout-align="center center">
+                            <md-button class="md-icon-button md-primary" ng-click="grid.appScope.detailView(row)" aria-label="Settings">
+                            <ng-md-icon icon="visibility"></md-icon>
+                            </md-button>
+                        </div>
+                    `,
+                    headerCellClass: 'text-center'
+                }
+
+			];
+			
+	
             
 		}
 		addChip() {

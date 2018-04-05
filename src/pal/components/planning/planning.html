@@ -33,9 +33,7 @@
 
     <hmx-chips data = "$ctrl.data" display="name" closeable="true" active="active" on-item-click="$ctrl.toggleActive(item)"></hmx-chips>
     <md-button class='md-raised' ng-click="$ctrl.addChip()">Add item</md-button>
-    <pre>
-        <h3>Test</h3>
-        {{$ctrl.data | json}}
-    </pre>
+    <br/>
+    <hmx-grid options="$ctrl.gridOptions" class="find-select-grid" selected-rows="$ctrl.selectedRows"/>
 
 </div>

@@ -1,12 +1,18 @@
+
+.grid {
+    // height: 250px;
+  }
+
 .ui-grid {
-    width: 100%;
     box-shadow: 1px 0 5px #ccc;
     .ui-grid-cell-contents {
         span.ui-grid-invisible {
             display: none;
         }
     }
-
+    .ui-grid-viewport , .ui-grid-header-viewport{
+        max-width: 100% !important;
+    }
 
     .watermark {
         position: absolute;
@@ -38,3 +44,21 @@
 
 
 }
+hmx-grid > div {
+    height: auto !important;
+    max-height: 250px;
+}
+.ui-grid-header-canvas {
+    height: 30px !important
+}
+.ui-grid-contents-wrapper, .ui-grid-render-container-body .ui-grid-viewport {
+    height: auto !important;
+    max-height: 250px;
+}
+
+
+.ui-grid-render-container-left .ui-grid-viewport {
+    max-height: 250px;
+}
+
+

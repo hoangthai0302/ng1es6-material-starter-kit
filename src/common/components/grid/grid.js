@@ -10,11 +10,10 @@ export default {
     template,
     controller: class Controller {
         /* @ngInject */
-        constructor(StringService, $scope, $stateParams, $q, $timeout, $templateCache, uiGridConstants) {
+        constructor($scope, $stateParams, $q, $timeout, $templateCache, uiGridConstants) {
 
             Object.assign(this, {
                 $scope,
-                StringService,
                 $stateParams,
                 $timeout,
                 $q,
@@ -52,6 +51,7 @@ export default {
                 columnDefs: this.options.columnDefs,
                 isLoading:false,
                 adjustHeight: () => {
+                    console.log('adjust height')
                     let length = this.options.data.length;
                     let maxRow = this.options.maxRow;
                     let cssClass = this.gridOptions.cssClass;
@@ -86,14 +86,11 @@ export default {
                             <label for="{{$ctrl.$id}}"></label>
                         </div>
                         `
-
                   );
-
-                  
 
                     this.options.gridApi = gridApi;
                     gridApi.core.on.rowsRendered(null, () => {
-                        this.gridOptions.adjustHeight();
+                        //this.gridOptions.adjustHeight();
                         if(this.options.data.length > 0 && !this.firstLoad){
                             console.log("first load : " + this.options.data.length);
                             this.firstLoad = true;

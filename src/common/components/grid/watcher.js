@@ -5,10 +5,9 @@ export default {
     },
     controller: class Controller {
         /* @ngInject */ 
-        constructor(StringService, $scope, $stateParams, $q, uiGridConstants) {
+        constructor($scope, $stateParams, $q, uiGridConstants) {
             Object.assign(this, {
                 $scope,
-                StringService,
                 $stateParams,
                 $q,
                 uiGridConstants
@@ -18,11 +17,11 @@ export default {
         $onChanges(changes) {
             //whenever data changes outside grid component, we dont need extra code to handle grid's height
             if (changes.data) {
-                setTimeout(() => {
-                    this.options.adjustHeight();
-                    $(window).trigger('resize');
-                    this.options.gridApi.core.notifyDataChange(this.uiGridConstants.dataChange.ALL);
-                })
+                // setTimeout(() => {
+                //     this.options.adjustHeight();
+                //     $(window).trigger('resize');
+                //     this.options.gridApi.core.notifyDataChange(this.uiGridConstants.dataChange.ALL);
+                // })
             }
         }
 
