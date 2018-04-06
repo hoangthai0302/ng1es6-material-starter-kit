@@ -22,19 +22,28 @@ const config = {
 				loader: ['ng-annotate-loader', 'babel-loader']
 			},
 			{
-				test: /\.s?css$/,
-				use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-                    use: ['css-loader',
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    plugins: (loader) => [autoprefixer()]
-                                }
-                            },
-                        'sass-loader'
-                    ]
-				  })),
+				test: /\.(s?)css$/,
+				use: ['css-loader', 
+				{
+					                loader: 'postcss-loader',
+					                options: {
+					                    plugins: (loader) => [autoprefixer()]
+					                }
+					            
+				},
+				'sass-loader']
+				// .concat(ExtractTextPlugin.extract({
+				// 	fallback: 'style-loader',
+                //     use: ['css-loader',
+                //             {
+                //                 loader: 'postcss-loader',
+                //                 options: {
+                //                     plugins: (loader) => [autoprefixer()]
+                //                 }
+                //             },
+                //         'sass-loader'
+                //     ]
+				//   })),
 			},
 			{
 				test: /\.(png|jpg|jpeg|gif|svg)$/,
@@ -81,7 +90,7 @@ const config = {
 		contentBase: './dist',
         historyApiFallback: true,
         compress:true,
-        hot:true
+        hot:false
 	}
 };
 
