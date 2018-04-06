@@ -7,26 +7,8 @@ class DialogService {
         this.$mdDialog = $mdDialog;
     }
 
-    showMessage(msg, title, isRemove, isRequest) {
-        title = title || 'Notice'
-        return this.showComponent('<pal-notice-box message="msg" confirm-request="isRequest" confirm-remove="isRemove"/>', {
-            msg: msg,
-            isRequest: isRequest,
-            isRemove: isRemove
-        }, {
-            size: 'small',
-            title: title
-        })
-    }
-    showConfirm(options,size) {
-        size = size || {width:'415px', height:'180px'}
-        return this.showComponent('<pal-notice-box-confirm class="layout-column" message="options.msg" btn-ok="options.btnOk" btn-cancel="options.btnCancel" on-ok="options.onOk()" on-cancel="options.onCancel()"/>', {
-            options
-        }, {
-            width: size.width,
-            height:size.height,
-            title: options.title || 'Info'
-        })
+    showMessage(msg) {
+        return this.alert({title:'Info', message: msg, ok: 'OK'})
     }
 
     showLoading(parent) {

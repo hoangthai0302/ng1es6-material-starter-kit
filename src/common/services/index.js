@@ -7,7 +7,7 @@ import CacheService from './cache.service';
 const ServicesModule = angular
   .module('hmx-common.services', [])
   .service('ApiService', ApiService)  
-  .service('hmxDialog', DialogService)
+  .service('DialogService', DialogService)
   .service('hmxCache', CacheService)
   .name;
 

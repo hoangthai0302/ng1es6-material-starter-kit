@@ -1,5 +1,6 @@
 import template from './grid.html';
 import './grid.scss';
+import perfectScrollbar from 'perfect-scrollbar';
 
 export default {
     bindings: {
@@ -51,52 +52,58 @@ export default {
                 columnDefs: this.options.columnDefs,
                 isLoading:false,
                 adjustHeight: () => {
-                    console.log('adjust height')
                     let length = this.options.data.length;
                     let maxRow = this.options.maxRow;
                     let cssClass = this.gridOptions.cssClass;
                     this.options.rowHeight = this.options.rowHeight || 30;
+                    let rowHeight = this.options.rowHeight;
                     if (length && maxRow) {
                         length = length > maxRow ? maxRow : length;
 
                         let height = length * this.options.rowHeight;
-                        $('.ui-grid.' + cssClass).height(height + 30).css({overflow:'hidden'});
+                        $('.ui-grid.' + cssClass).height(height + 30 + 10).css({overflow:'hidden'});
                         $('.ui-grid-render-container-body .ui-grid-viewport').height(height + 11);
                         height = Math.max(height, 30);
-                        $('.ui-grid-render-container-left .ui-grid-viewport').height(height);
+                        $('.ui-grid-render-container-left .ui-grid-viewport').height(height + 11);
                     } else {
                         $('.' + cssClass).height(150);
                     }
 
                 },
                 onRegisterApi: (gridApi) => {
-                    this.$templateCache.put('ui-grid/selectionRowHeaderButtons',
-                        `
-                        <div class="checkbox checkbox-default" ng-click="selectButtonClick(row, $event);grid.appScope.gridOptions.onRowSelectionClickedCb(row)">
-                            <input id="{{$ctrl.$id}}" ng-model="row.isSelected" class="styled" ng-model="$ctrl.selected" ng-change="$ctrl.onInputChange()" type="checkbox" ng-checked="row.isSelected">
-                            <label for="{{$ctrl.$id}}"></label>
-                        </div>
-                        `
-                    );
 
                     this.$templateCache.put('ui-grid/selectionSelectAllButtons',
                         `
-                        <div class="checkbox checkbox-default" ng-click="headerButtonClick($event)";grid.selection.selectAll=!grid.selection.selectAll;>
-                            <input id="{{$ctrl.$id}}" ng-model="grid.selection.selectAll" class="styled selectAll"  type="checkbox" ng-checked="grid.selection.selectAll">
-                            <label for="{{$ctrl.$id}}"></label>
+                        <div class="ui-grid-selection-row-header-buttons" 
+                            ng-if="grid.options.enableSelectAll" >
+                            <md-checkbox md-no-ink  ng-model="grid.selection.selectAll" ng-click="headerButtonClick($event); grid.selection.selectAll = !grid.selection.selectAll" type="checkbox"  ></md-checkbox>
                         </div>
                         `
                   );
+                this.$templateCache.put('ui-grid/selectionRowHeaderButtons',
+                `
+                <div>
+                    <md-checkbox md-no-ink   ng-model="row.isSelected" type="checkbox" ng-click="selectButtonClick(row, $event);grid.appScope.gridOptions.onRowSelectionClickedCb(row);row.isSelected = !row.isSelected" ></md-checkbox>
+                </div>
+                `
+            );
 
+                   
                     this.options.gridApi = gridApi;
                     gridApi.core.on.rowsRendered(null, () => {
-                        //this.gridOptions.adjustHeight();
+                        this.gridOptions.adjustHeight();
                         if(this.options.data.length > 0 && !this.firstLoad){
                             console.log("first load : " + this.options.data.length);
                             this.firstLoad = true;
                             if(this.options.onFirstLoadComplete){
                                 this.options.onFirstLoadComplete(gridApi);
+
                             }
+                            //replace default window scrollbar with custom scrollbar
+                            let viewportContainer = document.querySelector('.ui-grid-render-container-body .ui-grid-viewport');
+                            viewportContainer.style.overflow = 'hidden';
+                            viewportContainer.style.position = 'relative';
+                            new perfectScrollbar(viewportContainer);
                         }
 
                     });

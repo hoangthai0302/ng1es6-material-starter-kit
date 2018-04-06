@@ -4,14 +4,15 @@ export default {
 	template: template,
 	controller: class Controller {
 		/* @ngInject */
-		constructor($log, hmxDialog, $timeout, $q, $state, $element) {
+		constructor($log, DialogService, $timeout, $q, $state, $element, uiGridConstants) {
 			Object.assign(this, {
 				$log,
-				hmxDialog,
+				DialogService,
 				$timeout,
 				$state,
 				$q,
-				$element
+                $element,
+                uiGridConstants
 			})
 
 		}
@@ -57,30 +58,27 @@ export default {
 			  ];
 
 			  let data = [];
-			  for(let i = 0; i < 1000; i++){
+			  for(let i = 0; i < 8; i++){
 				  data.push({
 					  actualId: 'asdf asdf',
 					  status:'complete',
-					  stringValueEng:'TEXT_OPK'
+					  stringValueEng: Math.random().toString(36).substr(2, 16)
 				  })
 			  }
-			
+			let self = this;
 			this.gridOptions = {
                 appScopeProvider: this,
                 data: data,
-                maxRow: 9,
+                maxRow: 10,
+                enableSorting:true,
                 cssClass: 'import-string-grid',
                 enableRowSelection: true,
-                isRowSelectable: (row) => {
-                    if (row.entity.status !== "Completed") return false;
-                    else return true;
-                },
                 onRowSelectionClick(row) {
-                    if (row.entity.status !== "Completed") {
-                        self.DialogService.showMessage(`Translation Request is only allowed for the 'Completed' Status String.`)
-                    }
+                    
                 }
             }
+
+            let uiGridConstants = this.uiGridConstants;
 
             this.gridOptions.columnDefs = [{
                     field: 'actualId',
@@ -88,7 +86,11 @@ export default {
                 },
                 {
                     field: 'stringValueEng',
-                    displayName: 'English (US)'
+                    displayName: 'English (US)',
+                    sort: {
+                        direction: uiGridConstants.DESC,
+                        priority: 1
+                      }
                 },
                 {
                     name: 'Status',
@@ -232,12 +234,12 @@ export default {
 		};
 
 		showDialog() {
-			this.hmxDialog.showComponent('<h3>Hello world</h3>', null, {})
+			this.DialogService.showComponent('<h3>Hello world</h3>', null, {})
 
 		}
 
 		showConfirm() {
-			this.hmxDialog.confirm({
+			this.DialogService.confirm({
 				title: 'Please confirm',
 				message: `<p>Custom html content here <a href='#'>Link</a></p>`
 			}).then(() => {
@@ -246,7 +248,7 @@ export default {
 		}
 
 		showAlert() {
-			this.hmxDialog.alert({
+			this.DialogService.alert({
 				title: 'Alert',
 				message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 			}).then(() => {

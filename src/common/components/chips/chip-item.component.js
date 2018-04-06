@@ -48,15 +48,11 @@ export default {
             if(this.closeable === undefined){
                 this.closable = true;
             }
-
+            //update active prop
             this.$scope.$on('itemclick', (event, args) => {
                 this.isActive = df(this.data, this.active);
             });
 
-        }
-
-        $onChanges(changes) {
-            console.log(changes)
         }
 
         close() {

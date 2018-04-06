@@ -2,4 +2,5 @@
 
 <div ng-if="$ctrl.options.enableRowSelection" ui-grid="$ctrl.options" class="grid" data-ui-grid-infinite-scroll
     ui-grid-selection ui-grid-exporter ng-class="$ctrl.options.cssClass + ($ctrl.isLoading?' loading':'')">
+    <watcher data="$ctrl.options.data" options="$ctrl.options" />
 </div>

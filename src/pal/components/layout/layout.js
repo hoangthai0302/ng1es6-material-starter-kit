@@ -5,10 +5,10 @@ export default {
 	template,
 	controller: class Controller {
 		/* @ngInject */
-		constructor($log, hmxDialog, $timeout, $q, $state) {
+		constructor($log, DialogService, $timeout, $q, $state) {
 			Object.assign(this, {
 				$log,
-				hmxDialog,
+				DialogService,
                 $timeout,
                 $state,
 				$q
