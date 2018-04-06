@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint src/**/*.js webpack.config.js",
     "start": "webpack-dev-server",
-    "build": "webpack -p --progress",
+    "build": "set NODE_ENV=production && webpack -p --progress",
     "clean": "rimraf ./dist/*"
   },
   "repository": {
