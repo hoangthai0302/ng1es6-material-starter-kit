@@ -22,7 +22,7 @@ const config = {
 				loader: ['ng-annotate-loader', 'babel-loader']
 			},
 			{
-				test: /\.(scss)$/,
+				test: /\.s?css$/,
 				use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
 					fallback: 'style-loader',
                     use: ['css-loader',
@@ -35,13 +35,6 @@ const config = {
                         'sass-loader'
                     ]
 				  })),
-			},
-			{
-				test: /\.(css)$/,
-				use: ExtractTextPlugin.extract({
-					fallback: "style-loader",
-					use: ['css-loader', 'sass-loader']
-				  })
 			},
 			{
 				test: /\.(png|jpg|jpeg|gif|svg)$/,
@@ -87,7 +80,7 @@ const config = {
 		port: 3000,
 		contentBase: './dist',
         historyApiFallback: true,
-        compress:false,
+        compress:true,
         hot:true
 	}
 };

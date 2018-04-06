@@ -1,3 +1,22 @@
+
+/*fix bug md-checkbox display wrong in this project*/
+md-checkbox.md-checked .md-icon::after {
+    display: block;
+}
+
+//custom md-checkbox
+md-checkbox {
+    cursor:default;
+}
+md-checkbox .md-icon {
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+md-checkbox:not(.md-checked) .md-icon {
+    border-color:#e0e0e0 !important;
+}
+
 .md-calendar-day-header {
     color:#ccc;
     font-weight: normal;
@@ -89,3 +108,5 @@ md-select:not([disabled]):focus .md-select-value {
     border:none !important;
     border-radius: 3px 3px 0 0;
 }
+
+

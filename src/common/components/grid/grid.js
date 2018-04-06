@@ -76,14 +76,14 @@ export default {
                         `
                         <div class="ui-grid-selection-row-header-buttons" 
                             ng-if="grid.options.enableSelectAll" >
-                            <md-checkbox md-no-ink  ng-model="grid.selection.selectAll" ng-click="headerButtonClick($event); grid.selection.selectAll = !grid.selection.selectAll" type="checkbox"  ></md-checkbox>
+                            <md-checkbox class="md-primary" ng-model="grid.selection.selectAll" ng-click="headerButtonClick($event); grid.selection.selectAll = !grid.selection.selectAll" type="checkbox"  ></md-checkbox>
                         </div>
                         `
                   );
                 this.$templateCache.put('ui-grid/selectionRowHeaderButtons',
                 `
-                <div>
-                    <md-checkbox md-no-ink   ng-model="row.isSelected" type="checkbox" ng-click="selectButtonClick(row, $event);grid.appScope.gridOptions.onRowSelectionClickedCb(row);row.isSelected = !row.isSelected" ></md-checkbox>
+                <div class="ui-grid-selection-row-header-buttons">
+                    <md-checkbox class="md-primary" ng-model="row.isSelected" type="checkbox" ng-click="selectButtonClick(row, $event);grid.appScope.gridOptions.onRowSelectionClickedCb(row);row.isSelected = !row.isSelected" ></md-checkbox>
                 </div>
                 `
             );
